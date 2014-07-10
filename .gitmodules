@@ -1,0 +1,21 @@
+[submodule "neomru.vim"]
+	path = neomru.vim
+	url = https://github.com/Shougo/neomru.vim.git
+[submodule "tern_for_vim"]
+	path = tern_for_vim
+	url = https://github.com/marijnh/tern_for_vim.git
+[submodule "unite-help"]
+	path = unite-help
+	url = https://github.com/tsukkee/unite-help.git
+[submodule "unite-outline"]
+	path = unite-outline
+	url = https://github.com/h1mesuke/unite-outline.git
+[submodule "unite.vim"]
+	path = unite.vim
+	url = https://github.com/Shougo/unite.vim.git
+[submodule "vimproc.vim"]
+	path = vimproc.vim
+	url = https://github.com/Shougo/vimproc.vim.git
+[submodule "vimshell.vim"]
+	path = vimshell.vim
+	url = https://github.com/Shougo/vimshell.vim.git
