@@ -1,0 +1,95 @@
+let mapleader=','
+
+nnoremap <leader>u :GundoToggle<CR>
+
+"UNITE SETTINGS
+let g:unite_source_history_yank_enable = 1
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+nnoremap <leader>f :Unite -no-split -buffer-name=files   -start-insert file<CR>
+nnoremap <leader>r :Unite -no-split -buffer-name=mru     -start-insert file_mru<CR>
+"nnoremap <leader>o :Unite -no-split -buffer-name=outline -start-insert outline<CR>
+nnoremap <leader>y :Unite -no-split -buffer-name=yank    history/yank<CR>
+nnoremap <leader>e :Unite -no-split -buffer-name=buffer  buffer<CR>
+nnoremap <leader>o :Unite -no-split -buffer-name=open -start-insert file file_mru<CR>
+
+autocmd FileType unite call s:unite_settings()
+function! s:unite_settings()
+    " Play nice with supertab
+    "let b:SuperTabDisabled=1
+    " Enable navigation with control-j and control-k in insert mode
+    imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+    imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+endfunction
+
+"CUSTOM MAPPINGS
+noremap <F2> :wall<CR>
+noremap <F3> :Unite -start-insert file<CR>
+noremap <F4> :Unite bookmark<CR>
+noremap <F5> :Git add .<CR><bar> :Gcommit<CR>
+noremap <TAB> :Unite buffer<CR>
+
+"LEAVING UNMODIFIED BUFFERS
+set hidden
+
+"COLORSCHEME
+set t_Co=256
+
+if has('gui_running')
+    set background=light
+    colorscheme github
+else
+    set background=light
+    let g:solarized_termcolors=256
+    colorscheme solarized
+endif
+
+
+"SCROLLING
+set scrolloff=5
+set sidescroll=1
+set sidescrolloff=5
+
+"SYNTAX
+"let g:syntastic_html_tidy_ignore_errors = ['proprietary attribute', 'recognized', 'discarding unexpected']
+let g:syntastic_html_checkers = ['']
+
+"INDENTATION
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+syntax match Tab /\t/
+hi Tab gui=underline guifg=blue ctermbg=blue
+
+"HIGHLIGHTING
+set cul
+set nohls
+
+"MENU
+set wildmenu
+set wildmode=longest:full
+set laststatus=2
+
+"STATUSLINE
+"set statusline=%t[%{strlen(&fenc)?&fenc:'none'},%{&ff}]%h%m%r%y%=%c,%l/%L\ %P
+
+"spiiph's
+"set statusline=
+"set statusline+=%<\                       " cut at start
+"set statusline+=%2*[%n%H%M%R%W]%*\        " flags and buf no
+"set statusline+=%-40f\                    " path
+"set statusline+=%=%1*%y%*%*\              " file type
+"set statusline+=%10((%l,%c)%)\            " line and column
+"set statusline+=%P                        " percentage of file
+
+" jamessan's
+set statusline=   " clear the statusline for when vimrc is reloaded
+set statusline+=%-3.3n\                      " buffer number
+set statusline+=%f\                          " file name
+set statusline+=%h%m%r%w                     " flags
+set statusline+=[%{strlen(&ft)?&ft:'none'},  " filetype
+set statusline+=%{strlen(&fenc)?&fenc:&enc}, " encoding
+set statusline+=%{&fileformat}]              " file format
+set statusline+=%=                           " right align
+set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
+set statusline+=%b,0x%-8B\                   " current char
+set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
