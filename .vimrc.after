@@ -1,16 +1,15 @@
 let mapleader=','
 
-nnoremap <leader>u :GundoToggle<CR>
+filetype plugin indent on
 
-"UNITE SETTINGS
-let g:unite_source_history_yank_enable = 1
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
-nnoremap <leader>f :Unite -no-split -buffer-name=files   -start-insert file<CR>
-nnoremap <leader>r :Unite -no-split -buffer-name=mru     -start-insert file_mru<CR>
-"nnoremap <leader>o :Unite -no-split -buffer-name=outline -start-insert outline<CR>
-nnoremap <leader>y :Unite -no-split -buffer-name=yank    history/yank<CR>
-nnoremap <leader>e :Unite -no-split -buffer-name=buffer  buffer<CR>
-nnoremap <leader>o :Unite -no-split -buffer-name=open -start-insert file file_mru<CR>
+nnoremap <leader>f :Unite -buffer-name=files   -start-insert file file/new<CR>
+nnoremap <leader>r :Unite -buffer-name=mru                   file_mru<CR>
+nnoremap <leader>y :Unite -buffer-name=yank                  history/yank<CR>
+nnoremap <leader>e :Unite -buffer-name=buffer                buffer<CR>
+nnoremap <leader>b :Unite -buffer-name=bookmarks             bookmark<CR>
+nnoremap <leader>g :Unite -buffer-name=grep                  grep<CR>
+nnoremap <leader>cd :Unite -buffer-name=directory -start-insert directory<CR>
 
 autocmd FileType unite call s:unite_settings()
 function! s:unite_settings()
@@ -21,12 +20,35 @@ function! s:unite_settings()
     imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
 endfunction
 
-"CUSTOM MAPPINGS
-noremap <F2> :wall<CR>
-noremap <F3> :Unite -start-insert file<CR>
-noremap <F4> :Unite bookmark<CR>
-noremap <F5> :Git add .<CR><bar> :Gcommit<CR>
-noremap <TAB> :Unite buffer<CR>
+let g:vimfiler_as_default_explorer=1
+let g:vimfiler_enable_auto_cd=1
+
+"MY OWN CUSTOM MAPPINGS
+nnoremap <F2> :wall<CR>
+nnoremap <F3> :VimFiler<CR>
+
+nnoremap <F8> :make<CR><bar> :cwindow 7<CR>
+nnoremap <F10> :cprevious<CR>
+nnoremap <F11> :cnext<CR>
+nnoremap <F12> :cclose<CR>
+
+nnoremap <leader>o :TagbarToggle<CR>
+nnoremap <silent> <leader>s :b#<CR>
+
+nnoremap <leader>gw :Gwrite<CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gc :Gcommit<CR>
+
+augroup Javascript
+    au!
+    au FileType javascript setlocal makeprg=mocha\ --reporter=spec\ --growl\ --no-colors\ $*\ %
+    au FileType javascript setlocal autowrite
+    au FileType javascript let g:tagbar_width = 27
+    au FileType javascript let g:tagbar_autoclose = 1
+    au FileType javascript let b:delimitMate_expand_cr = 2
+    au FileType javascript let b:delimitMate_expand_space = 1
+    au FileType javascript nnoremap <F9> :make --debug-brk --timeout 0<CR><bar> :cwindow 7<CR>
+augroup END
 
 "LEAVING UNMODIFIED BUFFERS
 set hidden
@@ -43,7 +65,6 @@ else
     colorscheme solarized
 endif
 
-
 "SCROLLING
 set scrolloff=5
 set sidescroll=1
@@ -52,6 +73,19 @@ set sidescrolloff=5
 "SYNTAX
 "let g:syntastic_html_tidy_ignore_errors = ['proprietary attribute', 'recognized', 'discarding unexpected']
 let g:syntastic_html_checkers = ['']
+
+"CTRLP
+let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
+let g:ctrlp_open_new_file = 'r'
+let g:ctrlp_open_multiple_files = 'ri'
+
+"ULTISNIPS
+let g:UltiSnipsSnippetsDir = "~/.janus/my-snippets/ultisnips"
+let g:UltiSnipsExpandTrigger = "<c-tab>"
+let g:UltiSnipsListSnippets = "<c-s-tab>"
+
+"YOU COMPLETE ME
+let g:ycm_collect_identifiers_from_tags_files = 1
 
 "INDENTATION
 set softtabstop=4

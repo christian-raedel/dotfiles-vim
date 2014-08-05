@@ -19,3 +19,18 @@
 [submodule "vimshell.vim"]
 	path = vimshell.vim
 	url = https://github.com/Shougo/vimshell.vim.git
+[submodule "vimfiler.vim"]
+	path = vimfiler.vim
+	url = https://github.com/Shougo/vimfiler.vim.git
+[submodule "vim-nodejs-errorformat"]
+	path = vim-nodejs-errorformat
+	url = https://github.com/felixge/vim-nodejs-errorformat.git
+[submodule "delimitMate"]
+	path = delimitMate
+	url = https://github.com/Raimondi/delimitMate.git
+[submodule "ultisnips"]
+	path = ultisnips
+	url = https://github.com/SirVer/ultisnips.git
+[submodule "YouCompleteMe"]
+	path = YouCompleteMe
+	url = https://github.com/Valloric/YouCompleteMe.git
